@@ -15,7 +15,7 @@ public class Ventana_AFN extends javax.swing.JFrame {
     private int no_estados;
     private int tam_alf;
     private int cont_alf;
-    private int cont_est;
+    private int cont_est=0;
     private int cont_llenado=0;
     private int cantidad;
     private char[] vec_alf;
@@ -296,12 +296,13 @@ public class Ventana_AFN extends javax.swing.JFrame {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         if(jRadioButton1.isSelected() == true){// TODO add your handling code here:
             vec_alf = new char[tam_alf+2];
-            mat = new String[no_estados][tam_alf+2];
+            mat = new String[tam_alf+2][no_estados];
             vec_alf[tam_alf] = '^';
         }
         else{
-            vec_alf = new char[tam_alf];
-            mat = new String[no_estados][tam_alf+1];
+            vec_alf = new char[tam_alf+2];
+            mat = new String[tam_alf][no_estados];
+            vec_alf[tam_alf] = '^';
         }
         jLabel4.setText(Integer.toString(cont_alf+1));
     }//GEN-LAST:event_jButton2MouseClicked
@@ -345,7 +346,7 @@ public class Ventana_AFN extends javax.swing.JFrame {
             cont_llenado++;
             if (cont_llenado == cantidad) {
                 jTextField4.setEnabled(true);
-                mat[cont_est][cont_alf] = llenado;
+                mat[cont_alf][cont_est] = llenado;
                 llenado = "";
                 cont_llenado = 0;
                 jTextField5.setEnabled(false);
@@ -376,7 +377,7 @@ public class Ventana_AFN extends javax.swing.JFrame {
         }
         else {
             jTextField4.setEnabled(true);
-            mat[cont_est][cont_alf] = "/";
+            mat[cont_alf][cont_est] = "/";
             llenado = "";
             cont_llenado = 0;
             jTextField5.setEnabled(false);
@@ -418,9 +419,9 @@ public class Ventana_AFN extends javax.swing.JFrame {
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         if(jRadioButton2.isSelected())
-            mat[cont_est][tam_alf+1] = "si";
+            mat[tam_alf+1][cont_est] = "si";
         else            
-            mat[cont_est][tam_alf+1] = "no";
+            mat[tam_alf+1][cont_est] = "no";
         cont_est++;
         jLabel7.setText("q"+cont_est);
         if(cont_est == no_estados){
@@ -428,7 +429,7 @@ public class Ventana_AFN extends javax.swing.JFrame {
             jRadioButton1.setVisible(false);
             jButton4.setVisible(false);
             for(int i=0; i<mat.length; i++){
-                for(int j=0;j<=tam_alf+1;j++){
+                for(int j=0;j<no_estados;j++){
                     System.out.print(mat[i][j] + "\t");
                 }
                 System.out.println();
