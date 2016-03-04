@@ -13,7 +13,7 @@ public class Apuntador {
     
     private String transicion;
     private NodoAFN apuntador;
-    private String l;
+    
 
     public Apuntador(String transicion, NodoAFN apuntador) {
         this.transicion = transicion;
