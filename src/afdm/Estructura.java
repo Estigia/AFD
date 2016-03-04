@@ -12,6 +12,18 @@ import java.util.ArrayList;
  * @author carlosgarciar
  */
 public class Estructura {
-    ArrayList <NodoAFN> nodos = new ArrayList<NodoAFN>();
+    ArrayList <NodoAFN> nodos = new ArrayList<>();
+
+    public boolean comprobarSiExiste(String nombreNodo){
+        boolean bandera = false;
+        for (int i = 0; i < nodos.size(); i++) {
+            if (nodos.get(i).getNombre().equals(nombreNodo)){
+                bandera = true;
+            }
+        }
+        return bandera;
+    }
+    
+    
     
 }
