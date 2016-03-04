@@ -12,35 +12,30 @@ import java.util.ArrayList;
  * @author justo
  */
 public class NodoAFN {
-    private String Nombre;
-    private ArrayList<Apuntador> apuntador = new ArrayList<Apuntador>();
+    private String nombre;
+    private int numNodo;
 
-    public NodoAFN(String Nombre) {
-        this.Nombre = Nombre;
+    public NodoAFN(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+        this.nombre = nombre;
     }
 
-    public ArrayList<Apuntador> getApuntador() {
-        return apuntador;
+    public int getNumNodo() {
+        return numNodo;
     }
 
-    public void setApuntador(ArrayList<Apuntador> apuntador) {
-        this.apuntador = apuntador;
+    public void setNumNodo(int numNodo) {
+        this.numNodo = numNodo;
     }
-    
-    public void agregarElemento(NodoAFN nodo, String transicion)
-    {
-        Apuntador nuevoElemento = new Apuntador(transicion,nodo);
-        apuntador.add(nuevoElemento);
-    }
-    
+
+  
     
     
 }
