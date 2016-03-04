@@ -70,5 +70,7 @@ public class Estructura {
     }
     
     
-    
+    public void nada(){
+        System.out.println("Nada, entrando");
+    }
 }
