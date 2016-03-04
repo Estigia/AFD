@@ -40,11 +40,11 @@ public class Estructura {
         nodos.add(nodo);
     }
     
-    public void agregarMatriz(String nombre)
+    public NodoAFN [][] agregarMatriz(String nombre)
     {
+        NodoAFN nuevaMatriz[][] = new NodoAFN[alto][ancho+1] ;
         if (comprobarSiExiste(nombre) == false)
         {
-            NodoAFN nuevaMatriz[][] = new NodoAFN[alto][ancho+1];
             ancho++;
             nuevaMatriz = rellenarNuevaMatriz(nuevaMatriz);
             nAutomata = nuevaMatriz;
@@ -52,6 +52,7 @@ public class Estructura {
             nodos.add(nuevoNodo);
             
         } 
+        return nuevaMatriz;
         
     }
     
