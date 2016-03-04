@@ -301,7 +301,7 @@ public class Ventana_AFN extends javax.swing.JFrame {
         }
         else{
             vec_alf = new char[tam_alf+2];
-            mat = new String[tam_alf][no_estados];
+            mat = new String[tam_alf+2][no_estados];
             vec_alf[tam_alf] = '^';
         }
         jLabel4.setText(Integer.toString(cont_alf+1));
