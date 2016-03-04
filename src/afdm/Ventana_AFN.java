@@ -16,14 +16,19 @@ public class Ventana_AFN extends javax.swing.JFrame {
     private int tam_alf;
     private int cont_alf;
     private int cont_est;
+    private int cont_llenado=0;
     private int cantidad;
     private char[] vec_alf;
     private String[][] mat;
+    private String llenado="";
     /**
      * Creates new form Ventana_AFN
      */
     public Ventana_AFN() {
         initComponents();
+        jLabel7.setVisible(false);
+        jRadioButton2.setVisible(false);
+        jButton6.setVisible(false);
     }
 
     /**
@@ -56,6 +61,7 @@ public class Ventana_AFN extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         jButton5 = new javax.swing.JButton();
         jTextField5 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,24 +149,39 @@ public class Ventana_AFN extends javax.swing.JFrame {
             }
         });
 
+        jTextField5.setEnabled(false);
+
+        jButton6.setText("Aceptar");
+        jButton6.setToolTipText("");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2)))
+                .addGap(124, 124, 124)
+                .addComponent(jButton2)
                 .addContainerGap(466, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton6)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -243,10 +264,12 @@ public class Ventana_AFN extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jRadioButton2)))
+                    .addComponent(jRadioButton2)
+                    .addComponent(jButton6))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pack();
@@ -272,7 +295,7 @@ public class Ventana_AFN extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         if(jRadioButton1.isSelected() == true){// TODO add your handling code here:
-            vec_alf = new char[tam_alf+1];
+            vec_alf = new char[tam_alf+2];
             mat = new String[no_estados][tam_alf+2];
             vec_alf[tam_alf] = '^';
         }
@@ -308,6 +331,8 @@ public class Ventana_AFN extends javax.swing.JFrame {
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         cantidad = Integer.parseInt(jTextField4.getText());
+        jTextField4.setEnabled(false);
+        jTextField5.setEnabled(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -315,41 +340,101 @@ public class Ventana_AFN extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        String llenado ="";
-        for(int i=0; i<cantidad; i++)
-            llenado+= jTextField5.getText() + ",";
-        
-        mat[cont_est][cont_alf] = llenado;
-        cont_alf++;     
-        if(cont_alf == tam_alf)
-        {
-            if(cont_est == no_estados-1)
-            {
-                jLabel5.setVisible(false);
-                jLabel6.setVisible(false);
-                jTextField4.setVisible(false);
-                jButton3.setVisible(false);
-                cont_alf=0;         
-                cont_est=0;
-                
-                jLabel7.setVisible(true);
-                jRadioButton1.setVisible(true);
-                jButton4.setVisible(true);
-                jLabel7.setText("q"+cont_est);
-                
-            }
-            else{
-                cont_est++;
-                cont_alf=0;
-                jLabel5.setText("q"+ cont_est);
+        if (cantidad != 0) {
+            llenado += jTextField5.getText() + ",";
+            cont_llenado++;
+            if (cont_llenado == cantidad) {
+                jTextField4.setEnabled(true);
+                mat[cont_est][cont_alf] = llenado;
+                llenado = "";
+                cont_llenado = 0;
+                jTextField5.setEnabled(false);
+                cont_alf++;
+                if (cont_alf == tam_alf + 1) {
+                    if (cont_est == no_estados - 1) {
+                        jLabel5.setVisible(false);
+                        jLabel6.setVisible(false);
+                        jTextField4.setVisible(false);
+                        jButton3.setVisible(false);
+                        cont_alf = 0;
+                        cont_est = 0;
+
+                        jLabel7.setVisible(true);
+                        jRadioButton2.setVisible(true);
+                        jButton6.setVisible(true);
+                        jLabel7.setText("q" + cont_est);
+
+                    } else {
+                        cont_est++;
+                        cont_alf = 0;
+                        jLabel5.setText("q" + cont_est);
+
+                    }
+                }
+                jLabel6.setText(Character.toString(vec_alf[cont_alf]));
             }
         }
-        jLabel6.setText(Character.toString(vec_alf[cont_alf]));
+        else {
+            jTextField4.setEnabled(true);
+            mat[cont_est][cont_alf] = "/";
+            llenado = "";
+            cont_llenado = 0;
+            jTextField5.setEnabled(false);
+            cont_alf++;
+            if (cont_alf == tam_alf + 1) {
+                if (cont_est == no_estados - 1) {
+                    jLabel5.setVisible(false);
+                    jLabel6.setVisible(false);
+                    jTextField4.setVisible(false);
+                    jButton3.setVisible(false);
+                    cont_alf = 0;
+                    cont_est = 0;
+
+                    jLabel7.setVisible(true);
+                    jRadioButton2.setVisible(true);
+                    jButton6.setVisible(true);
+                    jLabel7.setText("q" + cont_est);
+
+                } else {
+                    cont_est++;
+                    cont_alf = 0;
+                    jLabel5.setText("q" + cont_est);
+
+                }
+            }
+            jLabel6.setText(Character.toString(vec_alf[cont_alf]));
+            
+        }
+        
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        if(jRadioButton2.isSelected())
+            mat[cont_est][tam_alf+1] = "si";
+        else            
+            mat[cont_est][tam_alf+1] = "no";
+        cont_est++;
+        jLabel7.setText("q"+cont_est);
+        if(cont_est == no_estados){
+            jLabel7.setVisible(false);
+            jRadioButton1.setVisible(false);
+            jButton4.setVisible(false);
+            for(int i=0; i<mat.length; i++){
+                for(int j=0;j<=tam_alf+1;j++){
+                    System.out.print(mat[i][j] + "\t");
+                }
+                System.out.println();
+            }
+        }
+    }//GEN-LAST:event_jButton6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -392,6 +477,7 @@ public class Ventana_AFN extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
