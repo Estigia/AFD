@@ -18,7 +18,7 @@ public class AFDm {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int x=3;
+        int x=5;
         int[][] a = new int[2][x];
         
         a[0][0]= 5;
