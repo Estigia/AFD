@@ -25,5 +25,10 @@ public class Estructura {
     }
     
     
+    public void agregarNodo(NodoAFN nodo)
+    {
+        nodos.add(nodo);
+    }
+    
     
 }
