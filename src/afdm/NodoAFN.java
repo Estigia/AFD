@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class NodoAFN {
     private String Nombre;
     private ArrayList<Apuntador> apuntador = new ArrayList<Apuntador>();
+    
+    
 
     public NodoAFN(String Nombre) {
         this.Nombre = Nombre;

@@ -13,6 +13,16 @@ import java.util.ArrayList;
  */
 public class Estructura {
     ArrayList <NodoAFN> nodos = new ArrayList<>();
+    String [][] nuevoAutomata;
+    NodoAFN [][] nAutomata;
+    private int alto;
+    private int ancho;
+
+    public Estructura() {
+        nAutomata = new NodoAFN[alto][1];
+    }
+    
+    
 
     public boolean comprobarSiExiste(String nombreNodo){
         boolean bandera = false;
@@ -29,6 +39,36 @@ public class Estructura {
     {
         nodos.add(nodo);
     }
+    
+    public void agregarMatriz(String nombre)
+    {
+        if (comprobarSiExiste(nombre) == false)
+        {
+            NodoAFN nuevaMatriz[][] = new NodoAFN[alto][ancho+1];
+            nuevaMatriz = rellenarNuevaMatriz(nuevaMatriz);
+            nAutomata = nuevaMatriz;
+            NodoAFN nuevoNodo = new NodoAFN(nombre);
+            nodos.add(nuevoNodo);
+        }
+        
+    }
+    
+    public  NodoAFN[][] rellenarNuevaMatriz (NodoAFN [][] matriz)
+    {
+        for (int i = 0; i < alto; i++) {
+            for (int j = 0; j < ancho; j++) {
+                matriz[i][j] = nAutomata[i][j];
+            }
+        }
+        return matriz;
+    }
+    
+    
+
+    public void setAlto(int alto) {
+        this.alto = alto;
+    }
+    
     
     
 }
