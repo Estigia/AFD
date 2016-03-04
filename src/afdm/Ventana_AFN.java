@@ -29,6 +29,7 @@ public class Ventana_AFN extends javax.swing.JFrame {
         jLabel7.setVisible(false);
         jRadioButton2.setVisible(false);
         jButton6.setVisible(false);
+        jButton2.setVisible(false);
     }
 
     /**
@@ -64,6 +65,7 @@ public class Ventana_AFN extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(700, 640));
 
         jLabel1.setText("No. Estados");
 
@@ -171,7 +173,7 @@ public class Ventana_AFN extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(124, 124, 124)
                 .addComponent(jButton2)
-                .addContainerGap(466, Short.MAX_VALUE))
+                .addContainerGap(505, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,7 +271,7 @@ public class Ventana_AFN extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jRadioButton2)
                     .addComponent(jButton6))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         pack();
@@ -285,8 +287,15 @@ public class Ventana_AFN extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         no_estados = Integer.parseInt(jTextField1.getText());
-        tam_alf = Integer.parseInt(jTextField2.getText());        
-        
+        tam_alf = Integer.parseInt(jTextField2.getText());  
+        vec_alf = new char[tam_alf+2];
+        mat = new String[tam_alf+2][no_estados];
+        vec_alf[tam_alf] = '^';
+        jRadioButton1.setEnabled(false);
+        jLabel4.setText(Integer.toString(cont_alf+1));
+        jTextField1.setEnabled(false);
+        jTextField2.setEnabled(false);
+        jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
