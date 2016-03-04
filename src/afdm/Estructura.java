@@ -45,11 +45,13 @@ public class Estructura {
         if (comprobarSiExiste(nombre) == false)
         {
             NodoAFN nuevaMatriz[][] = new NodoAFN[alto][ancho+1];
+            ancho++;
             nuevaMatriz = rellenarNuevaMatriz(nuevaMatriz);
             nAutomata = nuevaMatriz;
             NodoAFN nuevoNodo = new NodoAFN(nombre);
             nodos.add(nuevoNodo);
-        }
+            
+        } 
         
     }
     
@@ -68,6 +70,8 @@ public class Estructura {
     public void setAlto(int alto) {
         this.alto = alto;
     }
+    
+    
     
     
     public void nada(){
