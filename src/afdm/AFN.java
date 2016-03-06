@@ -12,88 +12,128 @@ package afdm;
 public class AFN {
     Estructura estructura = new Estructura();
 
-    public AFN(String[][] datos, int alto, int ancho) {
+    public AFN(String[][] datos, int alto, int ancho,int tam_alfabeto) {
         String[][] matrizAFN = new String[alto][ancho];
-        NodoAFN[][] matrizAFD = new NodoAFN[alto][1];
-       
+        String[][] matrizAFD = new String[alto-1][1];
+       matrizAFD = crearInicial(matrizAFN,ancho,tam_alfabeto,matrizAFD);
         
       
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    public void crearEstadoInicial(String[][] AFN, NodoAFN[][] AFDM, int ancho, char[] alfabeto)
-    {
-        AFDM[0][0].setNombre(AFN[0][0]+","+AFN[0][AFN.length-2]);
-        if((AFN[0][AFN.length-1]=="si")|| (AFN[0][AFN.length-1]=="si"))
+    public String[][] crearInicial(String[][] AFN,int ancho,int tam_alfabeto, String[][] AFD)
+    {   if(AFN[0][AFN.length-2].compareTo("/")==0)
         {
-            AFDM[0][AFN.length-1].setNombre("si");
+            String nombre=AFN[0][0];
+            if(AFN[AFN.length-1][0].compareTo("si")==0)
+            {
+                AFD[0][AFD.length-1]="si";
+                
+            }
+            for(int i=0;i<AFD.length-2;i++)
+                {
+                    AFD[i][0]= AFN[i][0];
+                }
         }
         else
-            AFDM[0][AFN.length-1].setNombre("no");
-        
-        int[] estados = obtenerEstadosInicial(AFDM,ancho,AFN);
-        obtenerEstadosDeTransicion(AFN,estados,alfabeto);
-    }
-    
-    public int[] obtenerEstadosInicial(NodoAFN[][] AFN,int ancho,String[][] AFDM)
-    {
-        String[] estados = AFN[0][0].getNombre().split(",");
-        int[] estadosInt = new int[estados.length];
-        for(int x=0;x<estados.length;x++)
-        {
-            estadosInt[x]= Integer.parseInt(estados[x]);
-        }
-        return estadosInt;
-    }
-    
-    public void obtenerEstadosDeTransicion(String[][] AFN,int[] estados,char[] alfabeto)
-    {
-        String cadena;
-        int[][] matrizTransiciones = new int[alfabeto.length-2][estados.length];
-        for(int x=0;x<estados.length;x++)
-        {
-            asignacion(AFN,estados[x],alfabeto,matrizTransiciones);
-        }
-        
-        for(int x=0;x<estados.length;x++)
-        {
-            for(int y=0;y<matrizTransiciones.length-1;y++)
+         {
+            
+            String nombre = AFN[0][0]+","+AFN[AFN.length-2][0];
+            String[] vecNombre = nombre.split(",");
+            String[][] matriz_temporal= new String[tam_alfabeto+1][vecNombre.length];
+            for(int x=0;x<vecNombre.length;x++)
             {
-                cadena = Integer.toString(matrizTransiciones[x][y]);
-                if(estructura.comprobarSiExiste(cadena)==true)
-                {
-                    //llamar a funcion para saber donde insertar
-                }
+                matriz_temporal = encontrar_Transiciones(Integer.parseInt(vecNombre[x]), tam_alfabeto,matriz_temporal,x,AFN); 
                 
-                else 
-                {
-                    
-                }
-                        
+            }
+            return unirTransiciones(matriz_temporal,ancho,AFD);
+        }
+        return null;
+    }
+        
+    
+    
+    public String[][] encontrar_Transiciones(int columna,int tam_alfabeto,String[][] matriz_temporal,int x,String[][] AFN)
+    {
+        for(int y=0;y<tam_alfabeto;y++)
+        {
+            matriz_temporal[y][x]=(AFN[y][columna]);
+               if(AFN[AFN.length-1][x].compareTo("si")==0)
+            {
+                matriz_temporal[matriz_temporal.length-1][x]="si";
             }
         }
-        
-        
-        
-        
-        
+        return matriz_temporal;
     }
     
-    public void asignacion(String[][] AFN,int columna,char[] alfabeto,int[][] matrizTransiciones)
+    public String[][] unirTransiciones(String[][] matriz_temporal,int ancho,String[][] AFD)
     {
-        for(int x=0;x<alfabeto.length-1;x++)
+        String fila="";
+        for(int i=0;i<matriz_temporal.length;i++)
         {
-            matrizTransiciones[x][columna]=Integer.parseInt(AFN[x][columna]);
+            for(int j=0;j<ancho;j++)
+            {
+                 fila = matriz_temporal[i][j];
+            }
+            AFD[i][0]=fila;
         }
+        return AFD;
     }
+    
+    public String[][] recorrerAFD(String[][] AFD,int ancho,int tam_alfabeto,int columna)
+    {
+        for(int x=0;x<tam_alfabeto;x++)
+        {
+            String transicion = AFD[x][columna];
+            transicion = separarTransiciones(transicion);
+            if(estructura.comprobarSiExiste(transicion)==true)
+            {
+                AFD[x][columna]=transicion;
+            }
+            else
+            {
+                //estructura.
+               // AFD[x][columna]= transicion;
+                
+                
+            }
+        }
+        return AFD;
+    }
+    
+    public String separarTransiciones(String cadena)
+    {
+        String transiciones="";
+        int cont=0;
+        String[] separador = cadena.split(",");
+        for(int i=0;i<separador.length;i++)
+        {
+            if(separador[i].compareTo("/")==0)
+            {
+                cont++;
+            }
+            else
+            {
+                transiciones=transiciones+separador[i]+",";
+            }
+        }
+        if(cont==separador.length)
+            return "/";
+        else
+        return transiciones;
+    }
+    
+    
+    
+    
+    
+    
+    
+   
+    
+    
+    
+
    
     }
     
