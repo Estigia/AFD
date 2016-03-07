@@ -72,8 +72,7 @@ public class Estructura {
         this.alto = alto;
     }
     
-    
-    
+        
     
     
 }
