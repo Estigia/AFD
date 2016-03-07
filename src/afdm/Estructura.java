@@ -52,7 +52,7 @@ public class Estructura {
             nodos.add(nuevoNodo);
             
         } 
-        return nuevaMatriz;
+        return nAutomata;
         
     }
     
@@ -75,7 +75,5 @@ public class Estructura {
     
     
     
-    public void nada(){
-        System.out.println("Nada, entrando");
-    }
+    
 }
