@@ -89,14 +89,17 @@ public class DevMatriz {
     public String ordenarNombre(String nombreDes)
     {
         String [] nodos = nombreDes.split("-");
-        Vector<String> estados = new Vector<>();
+        Vector<String> est = new Vector<>();
         for (int i = 0; i < nodos.length; i++) {
-            estados.add(nodos[i]);
+            if (comprobarNodoAgregado(nodos[i], est) == false)
+            {
+                est.add(nodos[i]);
+            }           
         }
-        Collections.sort(estados);
+        Collections.sort(est);
         String nombreEstado = "";
-        for (int i = 0; i < estados.size(); i++) {
-            nombreEstado = nombreEstado + estados.get(i);
+        for (int i = 0; i < est.size(); i++) {
+            nombreEstado = nombreEstado + est.get(i);
         }
         return nombreEstado;
     }
@@ -126,6 +129,23 @@ public class DevMatriz {
         this.ancho = ancho +1;
     }
 
+    /*
+    Comprueba si el nodo 1 ya se ha agregado en la concatenacion de un conjunto
+    para la creacion de un Nodo n. 
+    */
+    public boolean comprobarNodoAgregado (String nombreNodo, Vector <String> nodosAgregados)
+    {
+        boolean bandera = false;
+        for (int i = 0; i < nodosAgregados.size(); i++) {
+            if (nodosAgregados.get(i).equals(nombreNodo))
+            {
+                bandera = true;
+            }
+        }
+        return bandera;
+    }
+    
+    
     public void setAncho(int ancho) {
         this.ancho = ancho;
     }
