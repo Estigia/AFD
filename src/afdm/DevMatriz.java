@@ -153,6 +153,14 @@ public class DevMatriz {
     public void setAlto(int alto) {
         this.alto = alto;
     }
+
+    public int getAncho() {
+        return ancho;
+    }
+
+    public int getAlto() {
+        return alto;
+    }
     
     
     
